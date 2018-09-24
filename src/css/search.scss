@@ -1,0 +1,24 @@
+@import 'settings';
+
+.form{
+    width: 100%;
+    h3{
+        color: $dark-grey;
+    }
+    input{
+        width: 80%;
+        padding: 8px 15px 7px 15px;
+        margin: 0 auto;
+        font-size: $s-size;  
+        border-radius: 3px;      
+    }
+    .btn-search{
+        padding: 10px 15px 10px 15px;
+        background-color: $blue;
+        color: $white;
+        font-size: $s-size;
+        cursor: pointer;
+        border: none;
+        border-radius: 3px;
+    }
+}

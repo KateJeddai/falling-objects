@@ -1,0 +1,28 @@
+@import 'settings';
+
+.track-card{
+    width: 80%;
+    margin: $l-size auto 0 auto;
+    padding: $m-size $l-size;
+    border: 1px solid #ddd;
+    h2{
+        margin: 0;
+    }
+    .track-wrapper{
+        .track-up{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: $s-size;
+        }
+        .img{
+            flex-basis: 40%;
+            margin-top: $m-size;
+        }
+        .titles{
+            flex-basis: 55%;
+            margin-top: $m-size;            
+        }
+        
+    }
+}

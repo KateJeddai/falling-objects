@@ -1,0 +1,42 @@
+@import 'settings';
+
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding: 0;
+    font-family: $main-font, sans-serif;
+    min-height: 100vh;
+}
+.container{
+    width: 80%;
+    margin: 0 auto;
+    @media(min-width: $desktop-breakpoint){
+        width: 60%;    
+    }
+}
+.button{
+    padding: 8px 20px 10px 20px;
+    border: none;
+    background-color: $blue;
+    color: $white;
+    font-size: $s-size;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+pre{
+    line-height: 1.5rem !important;
+    white-space: pre-wrap;       /* css-3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;
+    font-family: $main-font;
+    font-size: 1rem;
+}
+.link{
+    text-decoration: none;
+    color: $blue;
+}

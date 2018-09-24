@@ -1,0 +1,10 @@
+@import 'settings';
+
+footer{
+    width: 100vw;
+    text-align: center;
+    background-color: $dark-grey;
+    color: $white;
+    padding: $m-size 0;
+    margin-top: $l-size;
+}

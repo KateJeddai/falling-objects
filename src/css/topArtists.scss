@@ -1,0 +1,26 @@
+@import 'settings';
+
+.artists-wrapper{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    .artist-card{
+        flex-basis: 22%;
+        text-align: center;
+        border: 1px solid #ddd;
+        margin-bottom: $xs-size;
+        padding: 0;
+        img{
+            margin-top: 0;
+            margin-bottom: $s-size;
+            width: 100%;
+        }
+        .title{
+            width: 100%;
+            padding: $xs-size;
+        }
+    }
+    
+}

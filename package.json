@@ -1,0 +1,48 @@
+{
+  "name": "react-music",
+  "version": "1.0.0",
+  "description": "project for learning",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack-dev-server --mode development --open --hot",
+    "build:prod": "webpack --mode production -p"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^1.0.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^2.0.0",
+    "history": "^4.7.2",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.9.3",
+    "react-router-dom": "^4.3.1",
+    "redux-devtools": "^3.4.1",
+    "sass-loader": "^7.1.0",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "moment": "^2.22.2",
+    "npm": "^6.4.1",
+    "react": "^16.4.2",
+    "react-clamp-lines": "^1.1.0",
+    "react-dom": "^16.4.2",
+    "react-images-upload": "^1.2.2",
+    "react-lines-ellipsis": "^0.13.2",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
+    "uuid": "^3.3.2"
+  }
+}

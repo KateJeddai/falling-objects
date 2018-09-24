@@ -1,0 +1,44 @@
+@import 'settings';
+
+.header{
+    width: 100vw;
+    height: auto;
+    background-color: $dark-grey;
+    padding: $s-size 0;
+    .header-inner{
+        width: 80%;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        @media(min-width: $desktop-breakpoint){
+            width: 60%;    
+        }
+    }
+    .brand-logo{
+        flex-basis: 25%;
+    }
+    .header-link{          
+        text-decoration: none; 
+        h1{
+            color: $white;
+            font-weight: 100; 
+            margin: 0;
+        }
+    }
+    .search{
+        flex-basis: 40%;
+        margin-top: -3.7rem;
+    }
+    nav{
+        flex-basis: 30%;
+        .nav-link{
+            color: $white;
+            text-decoration: none;
+            text-transform: uppercase;
+            margin-right: $l-size;
+            float: right;
+        }
+    }
+}

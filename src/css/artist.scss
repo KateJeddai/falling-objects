@@ -1,0 +1,52 @@
+@import 'settings';
+
+.artist-card{
+    width: 80%;
+    margin: $l-size auto;
+    .artist-wrapper{              
+        margin-top: $m-size;
+    }
+    h2{
+        text-align: center;
+        margin: 0;
+        margin-bottom: $s-size;
+    }  
+    .text{
+        line-height: 1.5rem !important;
+        font-family: $main-font;
+        font-size: 1rem;
+        margin-bottom: $s-size;
+    }  
+    
+    img{
+        float: left;
+        margin: $l-size $m-size 0 0;
+    }
+
+}
+.similar-container{
+    h2{
+        text-align: center;
+    }
+}
+.similar-group{
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 auto;
+    .similar{
+        flex-basis: 23%;
+        border: 1px solid #ddd;
+        margin-bottom: $s-size;
+    }
+    p{
+        text-align: center;
+    }
+    img{
+        width: 100%;
+    }
+    .title{
+        padding: 0 $s-size 0 $s-size;
+    }
+}
