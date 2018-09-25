@@ -1,5 +1,8 @@
 @import 'settings';
 
+.artist-container{
+    min-height: 95vh;
+}
 .artist-card{
     width: 80%;
     margin: $l-size auto;

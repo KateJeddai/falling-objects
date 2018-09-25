@@ -3,7 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { sortByArtistA, sortByArtistZ, sortByListeners } from '../actions/filterReducer';
-import Spinner from './Spinner';
+import { Spinner } from './Spinner';
 import addTopArtists from '../actions/artistReducer';
 import '../css/select.scss';
 import '../css/topArtists.scss';
@@ -95,7 +95,7 @@ class TopArtists extends React.Component{
                )}
                <button className="button show-more" onClick={this.handleShowMore}>Show More...</button>
             </div>
-        ) : ( <Spinner /> )
+        ) : ( <div className="spinner-container"><Spinner /></div> )
     }    
 }
 

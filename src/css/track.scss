@@ -1,5 +1,8 @@
 @import 'settings';
 
+.track-container{
+    min-height: 95vh;
+}
 .track-card{
     width: 80%;
     margin: $l-size auto 0 auto;

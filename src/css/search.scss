@@ -2,17 +2,23 @@
 
 .form{
     width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+   
     h3{
         color: $dark-grey;
     }
     input{
-        width: 80%;
+        flex-basis: 80%;
         padding: 8px 15px 7px 15px;
         margin: 0 auto;
         font-size: $s-size;  
-        border-radius: 3px;      
+        border-radius: 3px;
+              
     }
     .btn-search{
+        flex-basis: 10%;
         padding: 10px 15px 10px 15px;
         background-color: $blue;
         color: $white;
@@ -20,5 +26,9 @@
         cursor: pointer;
         border: none;
         border-radius: 3px;
+    }
+    .btn-search:hover{
+            background-color: $dark-blue;
+        
     }
 }

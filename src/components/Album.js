@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Spinner from './Spinner';
+import { SpinnerInd } from './Spinner';
 import axios from 'axios';
 import createHistory from 'history/createBrowserHistory';
 import '../css/album.scss';
@@ -43,7 +43,7 @@ class Album extends Component{
             published = published.split('').slice(0, 11).join('');
 
         return tracks && tracks.length > 0 ? (
-            <div className="container">
+            <div className="container album-container">
                 <div><button className="button" onClick={history.goBack}>Go Back</button></div>
                 <div className="album-card">
                   <h2><strong>{album}</strong></h2>   
@@ -69,7 +69,7 @@ class Album extends Component{
                   </div>
                 </div>  
             </div>
-        ) : (<Spinner /> )
+        ) : ( <div className="spinner-container"><SpinnerInd /></div> )
     }
 }
 

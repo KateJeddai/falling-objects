@@ -6,6 +6,7 @@ import { Header } from '../components//Header';
 import { Footer } from '../components/Footer';
 import TopTracks from '../components/TopTracks';
 import TopArtists from '../components/TopArtists';
+import SearchTracks from '../components/SearchTracks';
 import Track from '../components/Track';
 import Artist from '../components/Artist';
 import Album from '../components/Album';
@@ -30,6 +31,10 @@ const AppRouter = () => (
             <Route
               path="/topartists"  
               component={TopArtists}
+              />
+            <Route 
+              path="/searchresults"
+              component={SearchTracks}
               />
             <Route path="/track/:id" 
                    component={Track} 

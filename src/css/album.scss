@@ -1,5 +1,8 @@
 @import 'settings';
 
+.album-container{
+    min-height: 100vh;
+}
 .album-card{
     width: 80%;
     margin: $l-size auto 0 auto;

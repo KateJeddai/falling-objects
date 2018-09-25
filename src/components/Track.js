@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Spinner from './Spinner';
+import { SpinnerInd } from './Spinner';
 import { saveArtist } from '../actions/artistReducer';
 import '../css/track.scss';
 
@@ -19,9 +19,9 @@ class Track extends Component{
   };
   
   componentDidMount(){
+    window.scroll(0, 0);
     axios.get(`http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=9e453d7b43fbb0b0499f4399eb2a2807&mbid=${this.props.match.params.id}&format=json`)
          .then(res => {
-             console.log(res.data, res.data.track.name);
              this.setState(() => ({
                  track_title: res.data.track.name,
                  track_artist: res.data.track.artist.name,
@@ -42,11 +42,10 @@ class Track extends Component{
           album = this.state.album_name,
           track_published = this.state.track_published,
           track_content = this.state.track_content;
-
-          console.log(title.length);
+          track_published = track_published.split('').slice(0, 11).join('');
 
     return title && title.length > 0 ? (
-      <div className="container">
+      <div className="container track-container">
         <div className="track-card">
             <h2><strong>Title</strong>: {title}</h2>
             <div className="track-wrapper">
@@ -66,7 +65,7 @@ class Track extends Component{
             </div>    
         </div>
       </div>
-    ) : (<Spinner /> )
+    ) : ( <div className="spinner-container"><SpinnerInd /></div> )
   }
 }
 

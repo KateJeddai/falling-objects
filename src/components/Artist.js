@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import createHistory from 'history/createBrowserHistory';
 import { Link } from 'react-router-dom';
-import Spinner from './Spinner';
+import { SpinnerInd } from './Spinner';
 import axios from 'axios';
 import LinesEllipsis from 'react-lines-ellipsis';
 import '../css/artist.scss';
@@ -18,6 +18,7 @@ export default class Artist extends Component{
   };
 
  fetchArtist = (id) => {
+    window.scrollTo(0, 0);       
     axios.get(`http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${id}&api_key=9e453d7b43fbb0b0499f4399eb2a2807&format=json`)
     .then(res => {
         console.log(res.data);
@@ -40,6 +41,9 @@ export default class Artist extends Component{
        let id = this.props.match.params.id;
        if(id !== prevProps.match.params.id){
            this.fetchArtist(id);
+           this.setState(() => ({
+               full_text: false
+           }))
        }
   }
 
@@ -55,9 +59,9 @@ export default class Artist extends Component{
           artist_img = this.state.artist_img,
           similar = this.state.similar;
           
-    return artist_name === '' ? (<Spinner /> ) :
+    return artist_name === '' ? (<div className="spinner-container"><SpinnerInd /></div> ) :
          (
-     <div className="container">
+     <div className="container artist-container">
         <div><button className="button" onClick={history.goBack}>Go Back</button></div>
         <div className="artist-card">
             <div className="artist-wrapper">
@@ -82,11 +86,12 @@ export default class Artist extends Component{
                     /> 
                   </div>
                   )
-                }                 
+                }      
+                {artist_bio === '' ? (<p style={{ width: '100%', margin: '0 auto', textAlign: 'center' }}>No information provided</p>) : (           
                 <button className="button" onClick={this.handleReadMore}>
                     {this.state.full_text ? 'Show less' : 'Read more'}
                 </button>  
-                          
+                )}         
             </div>
          </div>
         { similar.length > 0 ? (

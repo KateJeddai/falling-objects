@@ -1,5 +1,14 @@
 @import 'settings';
 
+.tracks-top{
+    display: flex;
+    justify-content: space-between;
+    h1{
+        margin-top: $l-size;
+        color: $dark-grey;
+        margin-right: $s-size;
+    }
+}
 .tracks-wrapper{
     width: 100%;
     display: flex;
@@ -9,6 +18,7 @@
     .track-card{
         flex-basis: 22%;
         border: 1px solid #ddd;
+        border-radius: 5px;
         margin-bottom: $xs-size;
         text-align: center;
         padding: 0;
@@ -17,11 +27,24 @@
         }
         .title{
             width: 100%;
-            padding: $xs-size;
+            padding: 0 $xs-size $xs-size $xs-size;
+        }
+        p:not(.name){
+            padding: 0;
+            color: $notdark-grey;
+            font-size: $xs-font;
+            line-height: $xs-size;
+        }
+        .name {
+            color: $red;
         }
     }
 }
 .button.show-more{
     display: block;
     margin: $l-size auto; 
+}
+
+.search-container{
+    min-height: 95vh;
 }
