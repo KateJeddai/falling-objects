@@ -15,6 +15,7 @@ body{
 .container{
     width: 80%;
     margin: 0 auto;
+    transition: all 1s ease;
     @media(min-width: $desktop-breakpoint){
         width: 60%;    
     }
@@ -27,6 +28,9 @@ body{
     font-size: $s-size;
     cursor: pointer;
     text-decoration: none;
+    -webkit-box-shadow: 0px 0px 15px -4px rgba(13,13,13,1);
+-moz-box-shadow: 0px 0px 15px -4px rgba(13,13,13,1);
+box-shadow: 0px 0px 15px -4px rgba(13,13,13,1);
 }
 .button:hover{
     background-color: $dark-blue;
@@ -44,6 +48,8 @@ pre{
 }
 .link{
     text-decoration: none;
+    color: $blue !important;
+      
     p{ 
       color: $blue !important;
       margin-top: $s-size;

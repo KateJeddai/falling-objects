@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Spinner } from './Spinner';
 import axios from 'axios';
 import addTopTracks from '../actions/tracksReducer';
+import { scrollerReducer } from '../actions/scrollerReducer';
 import sortFunction from './sortFunction';
 import Select from './Select';
 import '../css/topTracks.scss';
@@ -16,6 +17,17 @@ class TopTracks extends React.Component{
     componentDidMount(){
         let { limit } = this.state;
         this.fetchTopTracks(limit);
+
+        window.addEventListener('scroll', this.handleScroll);
+    }
+    handleScroll = () => {
+        console.log(window.scrollY, window.innerHeight / 1.5);
+        if(window.scrollY > window.innerHeight / 1.5){
+            this.props.scrollerReducer('up');
+        }
+        else if(window.scrollY < window.innerHeight / 2){
+            this.props.scrollerReducer('down');
+        }
     }
     fetchTopTracks = (limit) => {
         axios.get(`http://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&limit=${limit}&api_key=9e453d7b43fbb0b0499f4399eb2a2807&format=json`)
@@ -35,6 +47,7 @@ class TopTracks extends React.Component{
         setTimeout(() => {
             this.fetchTopTracks(this.state.limit);   
         }, 500);        
+        this.props.scrollerReducer('down');
     }
 
     
@@ -80,7 +93,8 @@ const mapStateToProps = (state = {}) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    addTopTracks: (tracks) => dispatch(addTopTracks(tracks))
+    addTopTracks: (tracks) => dispatch(addTopTracks(tracks)),
+    scrollerReducer: (direction) => dispatch(scrollerReducer(direction))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopTracks);

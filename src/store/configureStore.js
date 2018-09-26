@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import tracksReducer from '../reducers/tracksReducer';
 import artistReducer from '../reducers/artistReducer';
 import filterReducer from '../reducers/filterReducer';
+import scrollerReducer from '../reducers/scrollerReducer';
 import { saveArtist } from '../reducers/artistReducer';
 
 
@@ -15,6 +16,7 @@ export default () => {
             tracksReducer,
             artistReducer,
             filterReducer,
+            scrollerReducer,
             saveArtist
         }),
         composeEnhancers(applyMiddleware(thunk))

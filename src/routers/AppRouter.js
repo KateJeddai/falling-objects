@@ -4,6 +4,7 @@ import createHistory from 'history/createBrowserHistory';
 import { Dashboard } from '../components/Dashboard';
 import { Header } from '../components//Header';
 import { Footer } from '../components/Footer';
+import Scroller from '../components/Scroller';
 import TopTracks from '../components/TopTracks';
 import TopArtists from '../components/TopArtists';
 import SearchTracks from '../components/SearchTracks';
@@ -17,7 +18,8 @@ export const history = createHistory();
 const AppRouter = () => (
     <Router history={history}>
       <div>
-        <Header />            
+        <Header /> 
+        <Scroller />           
         <Switch>
             <Route 
               path="/"

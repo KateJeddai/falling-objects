@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import createHistory from 'history/createBrowserHistory';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { scrollerReducer } from '../actions/scrollerReducer';
 import { SpinnerInd } from './Spinner';
 import axios from 'axios';
 import LinesEllipsis from 'react-lines-ellipsis';
@@ -8,7 +10,7 @@ import '../css/artist.scss';
 
 const history = createHistory();
 
-export default class Artist extends Component{
+class Artist extends Component{
   state = {
      artist_name: '',
      artist_bio: '',
@@ -21,7 +23,6 @@ export default class Artist extends Component{
     window.scrollTo(0, 0);       
     axios.get(`http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${id}&api_key=9e453d7b43fbb0b0499f4399eb2a2807&format=json`)
     .then(res => {
-        console.log(res.data);
         let artist = res.data.artist;
         this.setState(() => ({
            artist_name: artist.name,
@@ -35,6 +36,7 @@ export default class Artist extends Component{
    
   componentDidMount(){
        this.fetchArtist(this.props.match.params.id);
+       this.props.scrollerReducer('down');
   }
 
   componentDidUpdate(prevProps){
@@ -48,6 +50,10 @@ export default class Artist extends Component{
   }
 
   handleReadMore = () => {
+      if(this.state.full_text){
+          window.scrollTo(0, 0);
+          this.props.scrollerReducer('down');
+      }
       this.setState((prevState) => ({
           full_text: !prevState.full_text
       }));
@@ -105,9 +111,15 @@ export default class Artist extends Component{
               </div> 
             </div>  
               ) : (
-                    null
+                null
          )} 
      </div>
         )
   }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+    scrollerReducer: (direction, height) => dispatch(scrollerReducer(direction, height))
+});
+
+export default connect(undefined, mapDispatchToProps)(Artist);
