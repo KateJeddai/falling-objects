@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { sortByArtistA, sortByArtistZ, sortByListeners } from '../actions/filterReducer';
+import { scrollerReducer } from '../actions/scrollerReducer';
 import { Spinner } from './Spinner';
 import addTopArtists from '../actions/artistReducer';
 import '../css/select.scss';
@@ -16,21 +17,33 @@ class TopArtists extends React.Component{
     componentDidMount(){
         let { limit } = this.state;
         this.fetchTopArtists(limit);
+        window.addEventListener('scroll', this.handleScroll);
     }
+    handleScroll = (e) => {
+        if(window.scrollY > window.innerHeight / 2.5){
+            this.props.scrollerReducer('up', window.scrollY);
+        }
+        else if(window.scrollY < window.innerHeight / 2){
+            this.props.scrollerReducer('down', window.scrollY);
+        }
+    }
+    
     fetchTopArtists = (limit) => {
         axios.get(`http://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&limit=${limit}&api_key=9e453d7b43fbb0b0499f4399eb2a2807&format=json`)
              .then(res => {
                 let artists = res.data.tracks.track;
                 this.props.addTopArtists(artists); 
              })
+             .catch(err => console.log(err));
     }     
     handleShowMore = () => {
         this.setState((prevState) => ({
             limit: prevState.limit + 16
         }));
         setTimeout(() => {
-            this.fetchTopArtists(this.state.limit);   
-        }, 500);        
+            this.fetchTopArtists(this.state.limit);  
+            this.props.scrollerReducer('down', window.scrollY);     
+        }, 500);    
     }
     handleSort = (e) => {
         switch(e.target.value){
@@ -109,7 +122,8 @@ const mapDispatchToProps = (dispatch) => ({
     addTopArtists: (artists) => dispatch(addTopArtists(artists)),
     sortByArtistA: () => dispatch(sortByArtistA()),
     sortByArtistZ: () => dispatch(sortByArtistZ()),
-    sortByListeners: () => dispatch(sortByListeners())
+    sortByListeners: () => dispatch(sortByListeners()),
+    scrollerReducer: (direction, y) => dispatch(scrollerReducer(direction, y))
 });
 
 

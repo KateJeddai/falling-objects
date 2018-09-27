@@ -20,13 +20,12 @@ class TopTracks extends React.Component{
 
         window.addEventListener('scroll', this.handleScroll);
     }
-    handleScroll = () => {
-        console.log(window.scrollY, window.innerHeight / 1.5);
-        if(window.scrollY > window.innerHeight / 1.5){
-            this.props.scrollerReducer('up');
+    handleScroll = (e) => {
+        if(window.scrollY > window.innerHeight / 2.5){
+            this.props.scrollerReducer('up', window.scrollY);
         }
         else if(window.scrollY < window.innerHeight / 2){
-            this.props.scrollerReducer('down');
+            this.props.scrollerReducer('down', window.scrollY);
         }
     }
     fetchTopTracks = (limit) => {
@@ -45,9 +44,9 @@ class TopTracks extends React.Component{
             limit: prevState.limit + 16
         }));
         setTimeout(() => {
-            this.fetchTopTracks(this.state.limit);   
-        }, 500);        
-        this.props.scrollerReducer('down');
+            this.fetchTopTracks(this.state.limit);  
+            this.props.scrollerReducer('down', window.scrollY);
+        }, 500); 
     }
 
     
@@ -72,7 +71,7 @@ class TopTracks extends React.Component{
                                         )  :  (
                                         <Link className="link" to={`track/${mbid}`}><p className="name"><strong>{track.name}</strong></p></Link>
                                         )}                                 
-                                        <p>{artist}</p>
+                                        <Link className="link" to={`artist/${artist}`}><p>{artist}</p></Link>
                                         <p>Listeners: {track.listeners}</p>
                                      </div>
                            </div>
@@ -94,7 +93,7 @@ const mapStateToProps = (state = {}) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     addTopTracks: (tracks) => dispatch(addTopTracks(tracks)),
-    scrollerReducer: (direction) => dispatch(scrollerReducer(direction))
+    scrollerReducer: (direction, y) => dispatch(scrollerReducer(direction, y))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopTracks);

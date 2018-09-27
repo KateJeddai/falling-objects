@@ -20,7 +20,7 @@ class Artist extends Component{
   };
 
  fetchArtist = (id) => {
-    window.scrollTo(0, 0);       
+    window.scrollTo(0, 0);    
     axios.get(`http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${id}&api_key=9e453d7b43fbb0b0499f4399eb2a2807&format=json`)
     .then(res => {
         let artist = res.data.artist;
@@ -33,10 +33,20 @@ class Artist extends Component{
     })
     .catch(err => console.log(err));
  };
+
+ handleScroll = (e) => {
+    if(window.scrollY > window.innerHeight / 2.5){
+        this.props.scrollerReducer('up', window.scrollY);
+    }
+    else if(window.scrollY < window.innerHeight / 2){
+        this.props.scrollerReducer('down', window.scrollY);
+    }
+  }
    
   componentDidMount(){
        this.fetchArtist(this.props.match.params.id);
-       this.props.scrollerReducer('down');
+       this.props.scrollerReducer('down', 0);  
+       window.addEventListener('scroll', this.handleScroll);
   }
 
   componentDidUpdate(prevProps){
@@ -52,7 +62,7 @@ class Artist extends Component{
   handleReadMore = () => {
       if(this.state.full_text){
           window.scrollTo(0, 0);
-          this.props.scrollerReducer('down');
+          this.props.scrollerReducer('down', 0);
       }
       this.setState((prevState) => ({
           full_text: !prevState.full_text
@@ -119,7 +129,7 @@ class Artist extends Component{
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    scrollerReducer: (direction, height) => dispatch(scrollerReducer(direction, height))
+    scrollerReducer: (direction, y) => dispatch(scrollerReducer(direction, y))
 });
 
 export default connect(undefined, mapDispatchToProps)(Artist);

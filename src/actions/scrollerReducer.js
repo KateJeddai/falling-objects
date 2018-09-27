@@ -1,4 +1,4 @@
-export const scrollerReducer = (direction) =>  ({
+export const scrollerReducer = (direction, y) =>  ({
     type: 'SET_DIRECTION',
-    payload: { direction }
+    payload: { direction, y }
 });

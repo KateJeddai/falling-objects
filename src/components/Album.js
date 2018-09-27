@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { SpinnerInd } from './Spinner';
 import axios from 'axios';
 import createHistory from 'history/createBrowserHistory';
+import { scrollerReducer } from '../actions/scrollerReducer';
 import '../css/album.scss';
 
 export const history = createHistory();
@@ -18,10 +19,9 @@ class Album extends Component{
     };
     
     componentDidMount(){
-        console.log(this.props.artist_id);
+        window.addEventListener('scroll', this.handleScroll);
         axios.get(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=9e453d7b43fbb0b0499f4399eb2a2807&artist=${this.props.artist_id}&album=${this.props.match.params.id}&format=json`)
              .then(res => {
-                 console.log(res.data);
                  this.setState(() => ({
                     album_name: res.data.album.name,
                     album_artist: res.data.album.artist,
@@ -32,6 +32,14 @@ class Album extends Component{
                  }));    
              })             
              .catch(err => console.log(err));
+    }
+    handleScroll = (e) => {
+        if(window.scrollY > window.innerHeight / 2.5){
+            this.props.scrollerReducer('up', window.scrollY);
+        }
+        else if(window.scrollY < window.innerHeight / 2){
+            this.props.scrollerReducer('down', window.scrollY);
+        }
     }
 
     render(){
@@ -78,4 +86,9 @@ const mapStateToProps = (state = {}) => {
     return { artist_id: state.saveArtist.artist_id };
 }
 
-export default connect(mapStateToProps)(Album);
+const mapDispatchToProps = (dispatch) => ({
+    saveArtist: (artist_id) => dispatch(saveArtist(artist_id)),
+    scrollerReducer: (direction, y) => dispatch(scrollerReducer(direction, y))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Album);

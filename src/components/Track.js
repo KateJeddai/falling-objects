@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { scrollerReducer } from '../actions/scrollerReducer';
 import { SpinnerInd } from './Spinner';
 import { saveArtist } from '../actions/artistReducer';
 import '../css/track.scss';
@@ -20,6 +21,7 @@ class Track extends Component{
   
   componentDidMount(){
     window.scroll(0, 0);
+    window.addEventListener('scroll', this.handleScroll);
     axios.get(`http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=9e453d7b43fbb0b0499f4399eb2a2807&mbid=${this.props.match.params.id}&format=json`)
          .then(res => {
              this.setState(() => ({
@@ -34,6 +36,14 @@ class Track extends Component{
                  this.props.saveArtist(this.state.track_artist);
          })
          .catch(err => console.log(err));
+  }
+  handleScroll = (e) => {
+    if(window.scrollY > window.innerHeight / 2.5){
+        this.props.scrollerReducer('up', window.scrollY);
+    }
+    else if(window.scrollY < window.innerHeight / 2){
+        this.props.scrollerReducer('down', window.scrollY);
+    }
   }
 
   render(){
@@ -70,7 +80,8 @@ class Track extends Component{
 }
 
 const mapDispatchToProps = (dispatch) => ({
-      saveArtist: (artist_id) => dispatch(saveArtist(artist_id))
+      saveArtist: (artist_id) => dispatch(saveArtist(artist_id)),
+      scrollerReducer: (direction, y) => dispatch(scrollerReducer(direction, y))
 })
 
 export default connect(undefined, mapDispatchToProps)(Track);

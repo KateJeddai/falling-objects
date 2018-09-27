@@ -11,7 +11,7 @@ class Scroller extends React.Component{
   
   scrollDown = () => {
     let height = document.body.scrollHeight;
-        this.setState(() => ({ height_bot: height}));    
+       // this.setState(() => ({ height_bot: height}));    
         
     if(this.state.height < height){
          window.scrollTo(0, this.state.height + 70); 
@@ -20,12 +20,10 @@ class Scroller extends React.Component{
              height: prevState.height + 70
          }));
     }
-    else if(this.state.height >= height){
-        this.setState(() => ({  height: 0 }));
-    }
   } 
+
   scrollUp = () => {
-      this.setState(() => ({  height: 0 }));
+    //  this.setState(() => ({  height: 0 }));
       
       if(this.state.height_bot > 0){
          window.scrollTo(0, this.state.height_bot - 70); 
@@ -38,17 +36,20 @@ class Scroller extends React.Component{
 
 
   handleScroll = (e) => {
-      let direction = this.props.direction;
+        let direction = this.props.direction;
           if(direction === 'down'){
-             this.setState(() => ({  height: 0 }));
+              this.setState(() => ({  height: this.props.y || 0 }));
                 setTimeout(() => {       
                   this.scrollDown();
                   this.props.scrollerReducer('up');
                 }, 150); 
           }
           else if(direction === 'up'){
-             this.scrollUp();  
-             this.props.scrollerReducer('down');           
+             this.setState(() => ({  height_bot: this.props.y || document.body.scrollHeight })); 
+             setTimeout(() => {
+                 this.scrollUp();  
+                 this.props.scrollerReducer('down'); 
+             }, 150);          
           };
   }
 
@@ -62,14 +63,14 @@ class Scroller extends React.Component{
 }
 
 const mapStateToProps = (state = {}) => {
-    console.log(state.scrollerReducer.direction);
     return{
-        direction: state.scrollerReducer.direction
+        direction: state.scrollerReducer.direction,
+        y: state.scrollerReducer.y
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    scrollerReducer: (direction) => dispatch(scrollerReducer(direction))
+    scrollerReducer: (direction, y) => dispatch(scrollerReducer(direction, y))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Scroller);
