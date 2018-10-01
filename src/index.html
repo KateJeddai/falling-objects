@@ -8,7 +8,45 @@
       <!-- <link rel="stylesheet" type="text/css" href="../dist/main.css" /> -->
     </head>
     <body>
-        <div id="app"></div>
+        <aside id="control">
+            <form>
+             <div class="control-container">
+              <h1>Control Panel</h1>
+                <div class="input-group">
+                   <select id="choose-type">
+                      <option>Choose an object type:</option>
+                      <option value="square">Square</option>
+                      <option value="triangle">Triangle</option>
+                      <option value="all">All</option>
+                   </select>
+                </div>
+                <div class="input-group slider-container">
+                  <label>Choose the speed interval:</label><br>
+                 <!--  <input type="range" min="1" max="5" value="1" id="choose-speed" class="slider" /> -->
+                   <div id="slider" class="regular-slider"></div>
+                   <div id="slider-values"></div>
+                </div>
+                <div class="input-group">
+                   <select id="choose-size">
+                      <option>Change the size:</option>
+                      <option value="1">1x</option>
+                      <option value="2">2x</option>
+                      <option value="3">3x</option>
+                      <option value="5">5x</option>
+                   </select>
+                </div>
+                <div class="input-group">
+                  <button class="btn" id="wind">Create wind effect</button>
+                  <select id="choose-wind">
+                      <option>Choose direction:</option>
+                      <option value="east">East</option>
+                      <option value="west">West</option>
+                   </select>
+                </div>
+               </div> 
+              </form>  
+          </aside>
+          <canvas id="canvas"></canvas>
         
 
     <!-- <script src="../dist/bundle.js"></script> -->
